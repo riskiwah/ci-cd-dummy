@@ -12,7 +12,7 @@ pipeline {
             reference: '',
             trackingSubmodules: false]],
             submoduleCfg: [], 
-            url : 'https://github.com/riskiwah/cicdummy.git']])
+            url : 'https://github.com/riskiwah/cicdummy.git'])
         }
         stage ("branch deploy") {
             sh 'echo $BRANCH > BRANCH_FILE'
