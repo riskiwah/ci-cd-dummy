@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    stages{
-        stage ("checkout") {
-            steps {
+    stages {
+        stage("checkout"){
+            steps{
             checkout([$class: 'GitSCM', 
             branches: [[name: '*/master']], 
             doGenerateSubmoduleConfigurations: false, 
@@ -16,22 +16,20 @@ pipeline {
             url : 'https://github.com/riskiwah/cicdummy.git'])
             }
         }
-        stage ("branch deploy") {
-            steps {
+        stage("branch deploy"){
+            steps{
                 sh 'echo $BRANCH > BRANCH_FILE'
             }
-
-        stage ("docker build") {
+        }
+        stage("docker build"){
             steps{
-                 sh 'docker build -t riskiwah/cidummy .'
+                sh 'docker build -t riskiwah/cidummy .'
             }
-
-        stage ("docker push") {
-            steps {
+        }
+        stage("docker push"){
+            steps{
                 sh 'docker push riskiwah/cidummy'
             }
-    }
-}
         }
     }
 }
