@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cidummy
+  namespace: staging
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cidummy
+    spec:
+      containers:
+      - name: cicdummy
+        image: riskiwah/cidummy
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cidummy-svc
+  namespace: staging
+spec:
+  selector:
+    app: cidummy
+  type: NodePort
+  ports:
+  - name: cidummy
+    port:  80
+    targetPort: 5000

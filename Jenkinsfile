@@ -31,5 +31,13 @@ pipeline {
                 sh 'docker push riskiwah/cidummy'
             }
         }
+        stage("deploy to k8s"){
+            steps{
+                sh 'kubectl create namespace staging'
+                sh 'kubectl apply -f k8s/*'
+                sh 'kubectl get po -o wide -n staging'
+            }
+        }
+
     }
 }
