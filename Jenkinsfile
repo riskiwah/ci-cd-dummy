@@ -1,7 +1,7 @@
 pipeline {
     agent any
+    try {
     stages {
-        try {
         stage("checkout"){
             steps{
             checkout([$class: 'GitSCM', 
@@ -50,7 +50,9 @@ pipeline {
             }
         }
 
-    }catch(e){
+    }
+}
+catch(e){
     currentBuild.result = "FAILURE"
     throw e
     }finally {
@@ -58,5 +60,4 @@ pipeline {
             sh 'curl -s -X POST https://api.telegram.org/bot737736425:AAHaSlsEBMNIDy9xm8On_7ULKPb9f-PdAWo/sendMessage -d chat_id=726982393 -d text="build failure"'
         }
     }
-}
 }
