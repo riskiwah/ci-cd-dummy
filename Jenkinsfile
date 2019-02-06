@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    try {
+    // try {
     stages {
         stage("checkout"){
             steps{
@@ -52,12 +52,12 @@ pipeline {
 
     }
 }
-catch(e){
-    currentBuild.result = "FAILURE"
-    throw e
-    }finally {
-        if(currentBuild.result == 'FAILURE'){
-            sh 'curl -s -X POST https://api.telegram.org/bot737736425:AAHaSlsEBMNIDy9xm8On_7ULKPb9f-PdAWo/sendMessage -d chat_id=726982393 -d text="build failure"'
-        }
-    }
-}
+// catch(e){
+//     currentBuild.result = "FAILURE"
+//     throw e
+//     }finally {
+//         if(currentBuild.result == 'FAILURE'){
+//             sh 'curl -s -X POST https://api.telegram.org/bot737736425:AAHaSlsEBMNIDy9xm8On_7ULKPb9f-PdAWo/sendMessage -d chat_id=726982393 -d text="build failure"'
+//         }
+//     }
+// }
