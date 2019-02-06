@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: cidummy
-  namespace: staging
+  namespace: production
 spec:
   replicas: 1
   template:
@@ -18,7 +18,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: cidummy-svc
-  namespace: staging
+  namespace: production
 spec:
   selector:
     app: cidummy
