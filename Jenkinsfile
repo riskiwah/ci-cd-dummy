@@ -19,7 +19,7 @@ pipeline {
         }
         stage("start build"){
             steps{
-                sh 'curl -s -X POST https://api.telegram.org/bot737736425:AAHaSlsEBMNIDy9xm8On_7ULKPb9f-PdAWo/sendMessage -d chat_id=726982393 -d text="start build"'
+                sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="start build"'
             }
         }
         stage("branch deploy"){
@@ -45,7 +45,7 @@ pipeline {
         }
         stage("end build"){
             steps{
-                sh 'curl -s -X POST https://api.telegram.org/bot737736425:AAHaSlsEBMNIDy9xm8On_7ULKPb9f-PdAWo/sendMessage -d chat_id=726982393 -d text="end build"'
+                sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="end build"'
             }
         }
 
@@ -56,7 +56,7 @@ pipeline {
 //     throw e
 //     }finally {
 //         if(currentBuild.result == 'FAILURE'){
-//             sh 'curl -s -X POST https://api.telegram.org/bot737736425:AAHaSlsEBMNIDy9xm8On_7ULKPb9f-PdAWo/sendMessage -d chat_id=726982393 -d text="build failure"'
+//             sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="build failure"'
 //         }
 //     }
 // }
