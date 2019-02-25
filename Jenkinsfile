@@ -32,31 +32,28 @@ pipeline {
                 sh 'docker build -t riskiwah/cidummy .'
             }
         }
-        stage("docker push"){
+        stage("analyze image"){
             steps{
-                sh 'docker push riskiwah/cidummy'
+                sh 'echo "docker.io/riskiwah/cidummy:latest `pwd`/Dockerfile" > anchore_images'
+                anchore name: 'anchore_images'
             }
         }
-        stage("deploy to k8s"){
-            steps{
-                sh 'kubectl apply -f k8s/*'
-                sh 'kubectl get po -o wide -n staging'
-            }
-        }
-        stage("end build"){
-            steps{
-                sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="end build"'
-            }
-        }
+        // stage("docker push"){
+        //     steps{
+        //         sh 'docker push riskiwah/cidummy'
+        //     }
+        // }
+        // stage("deploy to k8s"){
+        //     steps{
+        //         sh 'kubectl apply -f k8s/*'
+        //         sh 'kubectl get po -o wide -n staging'
+        //     }
+        // }
+        // stage("end build"){
+        //     steps{
+        //         sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="end build"'
+        //     }
+        // }
 
     }
 }
-// catch(e){
-//     currentBuild.result = "FAILURE"
-//     throw e
-//     }finally {
-//         if(currentBuild.result == 'FAILURE'){
-//             sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="build failure"'
-//         }
-//     }
-// }
