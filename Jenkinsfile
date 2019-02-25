@@ -17,11 +17,11 @@ pipeline {
             url : 'https://github.com/riskiwah/cicdummy.git'])
             }
         }
-        stage("start build"){
-            steps{
-                sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="start build"'
-            }
-        }
+        // stage("start build"){
+        //     steps{
+        //         sh 'curl -s -X POST https://api.telegram.org/bot<token>/sendMessage -d chat_id=<id> -d text="start build"'
+        //     }
+        // }
         stage("branch deploy"){
             steps{
                 sh 'echo $BRANCH > BRANCH_FILE'
